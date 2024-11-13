@@ -9,7 +9,7 @@ const tryAgain = document.querySelector('.try-again');
 let points = 0;
 let bestPoints = 0;
 
-document.cookie = 'chave=valor; expires=Mon, 31 Dec 2024 23:59:59 GMT;path=/';
+// document.cookie = 'chave=valor; expires=Mon, 31 Dec 2024 23:59:59 GMT;path=/';
 
 const jump = () => {
     mario.classList.add('jump');
@@ -55,6 +55,7 @@ const loop = setInterval(() => {
         tryAgain.style.display = 'block';
         setInterval(() => {
             tryAgain.style.transform = 'scale(1)';
+            tryAgain.style.zIndex = '2';
         }, 50);
 
         sessionStorage.setItem('best-points-score', bestPoints);
@@ -67,7 +68,7 @@ if (sessionStorage.getItem('best-points-score') === false) {
     bestPoints = sessionStorage.getItem('best-points-score');
 }
 
-if (bestPoints != 0) {
+if (bestPoints >  0) {
     bestScore.textContent = `BEST SCORE: ${bestPoints -1}`;
 }
 const scorePoints = setInterval(() => {
