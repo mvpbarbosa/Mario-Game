@@ -1,0 +1,6 @@
+# Arquivos e diretórios ignorados pelo Prettier
+node_modules
+dist
+build
+coverage
+*.min.js
