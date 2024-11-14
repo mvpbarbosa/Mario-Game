@@ -5,18 +5,22 @@ const score = document.querySelector('.score');
 const bestScore = document.querySelector('.best-score');
 const gameBoard = document.querySelector('.game-board');
 const tryAgain = document.querySelector('.try-again');
+const jumpSound = document.querySelector('.mario-jump-sound');
+const deathSound = document.querySelector('.mario-death-sound');
 
 let points = 0;
 let bestPoints = 0;
-
+let isGameOver = false;
 // document.cookie = 'chave=valor; expires=Mon, 31 Dec 2024 23:59:59 GMT;path=/';
 
 const jump = () => {
-    mario.classList.add('jump');
-
-    setTimeout(() => {
-        mario.classList.remove('jump');
-    }, 500);
+    if (!isGameOver) {
+        jumpSound.play();
+        mario.classList.add('jump');
+        setTimeout(() => {
+            mario.classList.remove('jump');
+        }, 500);
+    }
 };
 
 const loop = setInterval(() => {
@@ -28,6 +32,7 @@ const loop = setInterval(() => {
     const cloudsPosition = clouds.offsetLeft;
 
     if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 105) {
+        isGameOver = true;
         pipe.style.animation = 'none';
         pipe.style.left = `${pipePosition}px`;
 
@@ -41,6 +46,10 @@ const loop = setInterval(() => {
         mario.style.width = '65px';
         mario.style.marginLeft = '55px';
 
+        mario.style.animation = 'death-jump 1s ease-out';
+        mario.style.bottom = '-300px';
+
+
         if (bestPoints <= points) {
             bestPoints = points;
             bestScore.textContent = `BEST SCORE: ${bestPoints - 1}`;
@@ -49,6 +58,7 @@ const loop = setInterval(() => {
             bestScore.textContent = `BEST SCORE: ${bestPoints - 1}`;
         }
 
+        deathSound.play();
         clearInterval(loop);
         clearInterval(scorePoints);
 
@@ -68,8 +78,8 @@ if (sessionStorage.getItem('best-points-score') === false) {
     bestPoints = sessionStorage.getItem('best-points-score');
 }
 
-if (bestPoints >  0) {
-    bestScore.textContent = `BEST SCORE: ${bestPoints -1}`;
+if (bestPoints > 0) {
+    bestScore.textContent = `BEST SCORE: ${bestPoints - 1}`;
 }
 const scorePoints = setInterval(() => {
     score.textContent = `SCORE: ${points}`;

@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Mario Jump</title>
-</head>
-<body>
-    <div class="game-board">
-        <p class="score">SCORE:</p>
-        <p class="score best-score">BEST SCORE:</p>
-        <p class="try-again">TRY AGAIN</p>
-        <img src="./images/clouds.png" class="clouds">
-        <img src="./images/mario.gif" class="mario">
-        <img src="./images/pipe.png" class="pipe">
-    </div>
-    <script src="/js/script.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <title>Mario Jump</title>
+    </head>
+    <body>
+        <div class="game-board">
+            <p class="score">SCORE:</p>
+            <p class="score best-score">BEST SCORE:</p>
+            <p class="try-again">TRY AGAIN</p>
+            <img src="./images/clouds.png" class="clouds" />
+            <img src="./images/mario.gif" class="mario" />
+            <img src="./images/pipe.png" class="pipe" />
+            <audio
+                class="mario-jump-sound"
+                src="/sounds/mario-jump-sound-effect.mp3"
+            ></audio
+            ><audio
+                class="mario-death-sound"
+                src="/sounds/super-mario-death-sound-effect-CUTTED.mp3"
+            ></audio>
+        </div>
+        <script src="/js/script.js"></script>
+    </body>
 </html>
