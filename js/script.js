@@ -7,6 +7,7 @@ const gameBoard = document.querySelector('.game-board');
 const tryAgain = document.querySelector('.try-again');
 const jumpSound = document.querySelector('.mario-jump-sound');
 const deathSound = document.querySelector('.mario-death-sound');
+const style = document.createElement('style');
 
 let points = 0;
 let bestPoints = 0;
@@ -31,6 +32,16 @@ const loop = setInterval(() => {
 
     const cloudsPosition = clouds.offsetLeft;
 
+    style.innerHTML = `
+        @keyframes death-animation {
+            0% { bottom: ${marioPosition}px; }
+            33% { bottom: ${marioPosition}px; }
+            66% { bottom: ${marioPosition + 300}px; } /* Subida */
+            100% { bottom: -300px; } /* Queda */
+        }
+    `;
+    document.head.appendChild(style);
+
     if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 105) {
         isGameOver = true;
         pipe.style.animation = 'none';
@@ -46,9 +57,8 @@ const loop = setInterval(() => {
         mario.style.width = '65px';
         mario.style.marginLeft = '55px';
 
-        mario.style.animation = 'death-jump 1s ease-out';
+        mario.style.animation = 'death-animation 1s ease-out';
         mario.style.bottom = '-300px';
-
 
         if (bestPoints <= points) {
             bestPoints = points;
